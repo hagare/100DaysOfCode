@@ -1,0 +1,77 @@
+Build Your First Blockchain Application in 5 Quick Steps
+Ben Stewart
+Ben Stewart
+Follow
+Feb 21, 2018 · 4 min read
+
+https://itnext.io/build-your-first-blockchain-application-in-5-quick-steps-89ebb96adbfe
+
+Click here to share this article on LinkedIn »
+To say there is hype around blockchain is an understatement. But in order for this revolution to keep advancing, we need more engineers! Recently, it was announced that there are 14 job openings for every one blockchain engineer.
+It’s clear that there’s a talent scarcity and the goal of this tutorial is to provide a blockchain foundation where you can quickly build your first full-stack decentralized application (DApp).
+We will be building a DApp that works as a voting system and the code can be found here. This tutorial will go over creating, compiling, and deploying the contract on a local blockchain network. You will then have the ability to interact with the contract via a nodejs cosole or a webpage GUI.
+Keep in mind that this can be completed with limited technical knowledge but it was designed for those that have a little coding experience. As we go through the steps, there will be a brief background on the process meant to serve as a high level overview. If any particular areas catch your interest, don’t hesitate to Google around for more information.
+This is a lightweight approach that allows you to hit the ground running with a full stack project. This tutorial features no frameworks, limited dependencies, and no BS.
+Lets jump right in…
+Step 1: Clone repository and install dependencies
+# Clone the source repository
+git clone https://github.com/benstew/voting-blockchain-dapp.git
+# Check that npm and node are installed
+# The tutorial was created with the below versions
+created with the below versions)
+$ npm -v
+v7.10.1
+$ node -v
+4.2.0
+Ganache is a blockchain simulator that runs in memory locally. We will be using this as the test Ethereum blockchain for our app:
+$ npm install ganache-cli web3@0.20.2
+Solidity code must be compiled. We will use “solc” to compile our solidity code:
+$ npm install solc
+Step 2: Run the Ganache CLI
+$ node_modules/.bin/ganache-cli
+Expected output:
+
+Step 3: Compile the Contract
+We will compile the contract from within the nodejs console:
+~/voting-blockchain-app $ node
+> Web3 = require('web3')
+> web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+We can ensure that the web3 object is initialized and can communicate with the blockchain by using the ‘accounts’ method on the object:
+
+To compile the contract, load the solidity code from voting.sol into a string variable then compile (will run in a nodejs console as well):
+> code = fs.readFileSync('voting.sol').toString()
+> solc = require('solc')
+> compiledCode = solc.compile(code)
+Step 4: Deploy the Contract
+Create a contract object and deploy the contract:
+> abiDefinition = JSON.parse(compiledCode.contracts[':voting'].interface)
+> VotingContract = web3.eth.contract(abiDefinition)
+> byteCode = compiledCode.contracts[':voting'].bytecode
+> deployedContract = VotingContract.new(['Bill','Tom','Janice'],{data: byteCode, from: web3.eth.accounts[0], gas: 4700000})
+> deployedContract.address
+> contractInstance = VotingContract.at(deployedContract.address)
+FYI — Interacting with the blockchain costs money. We are specifying how much we are willing to pay for our code to be included in the blockchain through the gas amount above. This amount will be given to the miners so that our code can be included in the blockchain.
+Step 5: Interact with the contract
+First, we are going to interact with the contract through a node console:
+> contractInstance.totalVotesFor.call('Bill')
+Output: { [String: '0'] s: 1, e: 0, c: [ 0 ] }
+> contractInstance.voteForCandidate('Bill', {from: web3.eth.accounts[0]})
+Output: '0xdedc7ae544c3dde74ab5a0b07422c5a51b5240603d31074f5b75c0ebc786bf53'
+> contractInstance.voteForCandidate('Tom', {from: web3.eth.accounts[0]})
+Output:'0x02c054d238038d68b65d55770fabfca592a5cf6590229ab91bbe7cd72da46de9'
+> contractInstance.voteForCandidate('Tom', {from: web3.eth.accounts[0]})
+Output:'0x3da069a09577514f2baaa11bc3015a16edf26aad28dffbcd126bde2e71f2b76f'
+$ contractInstance.totalVotesFor.call('Janice').toLocaleString()
+Output:'3'
+We can also interact with the contract through a lightweight, web GUI.
+In order to use the GUI, you will need to update the contract instance address in ~/voting-blockchain-app/index.js for your contract
+# In your nodejs console, execute contractInstance.address to 
+# get the address at which the contract is deployed and change 
+# the line below to use your deployed address
+contractInstance = ScoringContract.at('0xe46c0742867695226bdacc9b821d7f26dbdd294e');
+Open ~/voting-blockchain-app/index.html in your browser. You should see the below and be able to interact by entering a candidate’s name (Bill, Tom, Janice) and clicking ‘Vote’:
+
+The goal of this tutorial was to provide a quick, concise introduction to building your first blockchain application. By understanding the full stack flow, it is easy to tweak this toy application or build something completely new.
+A good next step is to dive into the Ethereum documentation available here. There you can learn to build anything from more advanced DApps to crowdsales to building your own cryptocurrency!
+Yours Truly,
+Ben Stewart
