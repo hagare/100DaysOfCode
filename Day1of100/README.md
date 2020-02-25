@@ -1,6 +1,8 @@
 # Date: 2/25/20
 # Day 1 of 100 of the 100 Days of Code Challenge
+
 # Building a Simple Blockchain application
+## NodeJS and ethereum Blockchain:
 Based on ![Medium Article](https://itnext.io/build-your-first-blockchain-application-in-5-quick-steps-89ebb96adbfe)
 
 Clone and Install Repositories
@@ -15,3 +17,10 @@ $ node -v
 4.2.0
 
 # Current system use npm v3.11.2 and node v8.11.3
+
+<hr>
+
+# Other Tutorials
+## Python Blockchain:
++ https://developer.ibm.com/technologies/blockchain/tutorials/develop-a-blockchain-application-from-scratch-in-python/
++ https://hackernoon.com/learn-blockchains-by-building-one-117428612f46
