@@ -1,19 +1,16 @@
-# Check NPM and NODE versions
-#echo "npm -v"
+## Check NPM and NODE versions
+## echo "npm -v"
 #npm -v
-#echo "node -v"
+## echo "node -v"
 #node -v
 
-# Install Ganache CLI
-# personal blockchain for Ethereum development
-# uses ethereumjs to simulate full client behavior 
-#npm install -g ganache-cli
+## Install Ganache CLI
+## personal blockchain for Ethereum development
+## uses ethereumjs to simulate full client behavior 
+#npm install -g ganache-cli web3@0.20.2
 
-# use Ganache CLI by https://github.com/trufflesuite/ganache-cli
-# ganache-cli <options>
+## use Ganache CLI by https://github.com/trufflesuite/ganache-cli
+## ganache-cli <options>
 
-# Install web3
-npm install web3
-
-# Install Solidity code compiler: using solc
-npm install solc
+## Install Solidity code compiler: using solc
+#npm install solc
