@@ -14,3 +14,8 @@
 
 ## Install Solidity code compiler: using solc
 #npm install solc
+
+## Run the Ganache CLI
+#node_modules/.bin/ganache-cli
+
+
