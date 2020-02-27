@@ -46,9 +46,30 @@ class CryptoBlockchain{
   }
 }
 
+// Instantiate new blockchain smashingCoin
 let smashingCoin = new CryptoBlockchain();
+// Create nwe blocs with addNewBlock method
 smashingCoin.addNewBlock(new CryptoBlock(1, "02/26/2020", {sender: "Iris Ljesnjanin", recipient: "Cosima Mielke", quantity: 50}));
 smashingCoin.addNewBlock(new CryptoBlock(2, "02/27/2020", {sender: "Vitaly Friedman", recipient: "Ricardo Gimenes", quantity: 100}) );
 smashingCoin.addNewBlock(new CryptoBlock(3, "02/27/2020", {sender: "Hagar Coder", recipient: "Janae Maker", quantity: 1000}));
+// print out blockchain parameters for 4 blocks
 console.log(JSON.stringify(smashingCoin, null, 4));
+
+// Verify Blockchain's Integrity
+// checkChainValidity method verifies if two consecutive blocks point to each other
+// genesis block hardcoded will not be checked (index 0 in array)
+checkChainValidity(){
+        for(let i = 1; i < this.blockchain.length; i++){
+            const currentBlock = this.blockchain[i];
+            const precedingBlock= this.blockchain[i-1];
+// any anomalies indicate blockchain has been compromised and method returns false
+          if(currentBlock.hash !== currentBlock.computeHash()){
+              return false;
+          }
+// otherwise method return true
+          if(currentBlock.precedingHash !== precedingBlock.hash)
+            return false;
+        }
+        return true;
+    }
 

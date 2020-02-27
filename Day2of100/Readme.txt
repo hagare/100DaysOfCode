@@ -25,3 +25,7 @@ Create CryptoBlock class
 ## Create new instance of CryptoBlockchain() method. Our currency is smashingcoin.js
 ## use method addNewBlock to create blocks to chain
 ## output 4 hashes in chain
+
+# Verify Blockchain's Integrity
+>>> once a block has been added to the chain it cannot be changed without invalidating the integrity of the rest of the chain
+## verify blockchain integrity
