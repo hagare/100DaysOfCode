@@ -22,10 +22,23 @@ class CryptoBlock{
     // return SHA256(this.index + this.precedingHash + this.timestamp + JSON.stringify(this.data)).toString();
 
     // updated computHash() method to include nonce random value required for proofOfWork() method
-     return SHA256(this.index + this.precedingHash + this.timestamp + JSON.stringify(this.data)+this.nonce).toString();
+     return SHA256(this.index + this.precedingHash + this.timestamp + JSON.stringify(this.data) + this.nonce).toString();
     }
-    }
+
+// Add Proof Of Work method
+// create method proofOfWork() that uses a simple algorithm to identify a number (difficulty property)
+// so that every block has leading zeros that correspond to this difficulty level
+// the higher the "difficulty" the more time it takes to mine new blocks
+// add random nonce value to every hashed block so that when rehashing takes place the difficulty 
+// level restriction can still be met
+proofOfWork(difficulty){
+      while(this.hash.substring(0, difficulty) !==Array(difficulty + 1).join("0")){
+          this.nonce++;
+          this.hash = this.computeHash();
+      }        
   }
+ }
+ 
 
 // Create block class called CryptoBlockchain class which controls the chain
 class CryptoBlockchain{
@@ -60,23 +73,15 @@ class CryptoBlockchain{
       this.blockchain.push(newBlock);
   }
  
-  }
-}
-
-// Instantiate new blockchain smashingCoin
-let smashingCoin = new CryptoBlockchain();
-// Create new blocks with addNewBlock method
-console.log("smashignCoin mining in progress... "); // let user know program is running
-smashingCoin.addNewBlock(new CryptoBlock(1, "02/26/2020", {sender: "Iris Ljesnjanin", recipient: "Cosima Mielke", quantity: 50}));
-smashingCoin.addNewBlock(new CryptoBlock(2, "02/27/2020", {sender: "Vitaly Friedman", recipient: "Ricardo Gimenes", quantity: 100}) );
-smashingCoin.addNewBlock(new CryptoBlock(3, "02/27/2020", {sender: "Hagar Coder", recipient: "Janae Maker", quantity: 1000}));
-// print out blockchain parameters for 4 blocks
-console.log(JSON.stringify(smashingCoin, null, 4));
+  
+// Verify Blockchain's Integrity
+// checkChainValidity method verifies if two consecutive blocks point to each other
+// genesis block hardcoded will not be checked (index 0 in array)
 
 // Verify Blockchain's Integrity
 // checkChainValidity method verifies if two consecutive blocks point to each other
 // genesis block hardcoded will not be checked (index 0 in array)
-checkChainValidity(){
+    checkChainValidity(){
         for(let i = 1; i < this.blockchain.length; i++){
             const currentBlock = this.blockchain[i];
             const precedingBlock= this.blockchain[i-1];
@@ -90,16 +95,18 @@ checkChainValidity(){
         }
         return true;
     }
-
-// Add Proof Of Work method
-// create method proofOfWork() that uses a simple algorithm to identify a number (difficulty property)
-// so that every block has leading zeros that correspond to this difficulty level
-// the higher the "difficulty" the more time it takes to mine new blocks
-// add random nonce value to every hashed block so that when rehashing takes place the difficulty 
-// level restriction can still be met
-proofOfWork(difficulty){
-      while(this.hash.substring(0, difficulty) !==Array(difficulty + 1).join("0")){
-          this.nonce++;
-          this.hash = this.computeHash();
-      }        
   }
+
+
+// Instantiate new blockchain smashingCoin
+let smashingCoin = new CryptoBlockchain();
+// Create new blocks with addNewBlock method
+console.log("smashingCoin mining in progress... "); // let user know program is running
+smashingCoin.addNewBlock(new CryptoBlock(1, "02/26/2020", {sender: "Iris Ljesnjanin", recipient: "Cosima Mielke", quantity: 50}));
+smashingCoin.addNewBlock(new CryptoBlock(2, "02/27/2020", {sender: "Vitaly Friedman", recipient: "Ricardo Gimenes", quantity: 100}) );
+smashingCoin.addNewBlock(new CryptoBlock(3, "02/27/2020", {sender: "Hagar Coder", recipient: "Janae Maker", quantity: 1000}));
+// print out blockchain parameters for 4 blocks
+console.log(JSON.stringify(smashingCoin, null, 4));
+
+ // Check chain validity
+// console.log("Is Chain Valid?: "+ smashingCoin.checkChainValidity());

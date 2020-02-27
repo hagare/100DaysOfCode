@@ -32,5 +32,6 @@ Create CryptoBlock class
 
 # Add Proof of Work
 >>> increase the difficulty entailed in mining or adding new blocks to the blockchain
+## Update CryptoBlock class to include proofOfWork() method
 ## Create a simple algorithm that deters people from generating new blocks easily or spamming the blockchain
 ## Update code with nonce and proofOfWork() parameters/methods as necessary
