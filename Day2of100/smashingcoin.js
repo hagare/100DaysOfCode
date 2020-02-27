@@ -72,6 +72,7 @@ class CryptoBlockchain{
       newBlock.proofOfWork(this.difficulty);       
       this.blockchain.push(newBlock);
   }
+<<<<<<< HEAD
  
   
 // Verify Blockchain's Integrity
@@ -110,3 +111,6 @@ console.log(JSON.stringify(smashingCoin, null, 4));
 
  // Check chain validity
 // console.log("Is Chain Valid?: "+ smashingCoin.checkChainValidity());
+=======
+}
+>>>>>>> parent of 4ccfa42... test the blockchain by adding new instances
