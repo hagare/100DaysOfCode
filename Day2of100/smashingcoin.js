@@ -13,11 +13,17 @@ class CryptoBlock{
     this.data = data;
     this.precedingHash = precedingHash;
     this.hash = this.computeHash();
+    // add nonce parameter to constructor method for use in proofOfWork() method
+    this.nonce = 0;
     }
   computeHash(){
     // crypto-js library used to caluclate hash of each block.
     // output of sha256 is a number, use toString() method to convert to string
-    return SHA256(this.index + this.precedingHash + this.timestamp + JSON.stringify(this.data)).toString();
+    // return SHA256(this.index + this.precedingHash + this.timestamp + JSON.stringify(this.data)).toString();
+
+    // updated computHash() method to include nonce random value required for proofOfWork() method
+     return SHA256(this.index + this.precedingHash + this.timestamp + JSON.stringify(this.data)+this.nonce).toString();
+    }
     }
   }
 
@@ -27,6 +33,8 @@ class CryptoBlockchain{
   constructor(){
     // property is an array of blocks
     this.blockchain = [this.startGenesisBlock()];
+    // updated constructor() method to include difficulty value required for proofOfWork() method
+    this.difficulty = 4;
   }
   // Creating the genesis block. initiate block using the CryptoBlock class and pass the parmeters
   startGenesisBlock(){
@@ -39,16 +47,26 @@ class CryptoBlockchain{
   obtainLatestBlock(){
     return this.blockchain[this.blockchain.length - 1];
   }
-  addNewBlock(newBlock){
-    newBlock.precedingHash = this.obtainLatestBlock().hash;
-    newBlock.hash = newBlock.computeHash();
-    this.blockchain.push(newBlock);
+   // addNewBlock(newBlock){
+   // newBlock.precedingHash = this.obtainLatestBlock().hash;
+   // newBlock.hash = newBlock.computeHash();
+   // this.blockchain.push(newBlock);
+
+   // updated addNewBlock() method to use the proofOfWork() method
+    addNewBlock(newBlock){
+      newBlock.precedingHash = this.obtainLatestBlock().hash;
+      //newBlock.hash = newBlock.computeHash(); 
+      newBlock.proofOfWork(this.difficulty);       
+      this.blockchain.push(newBlock);
+  }
+ 
   }
 }
 
 // Instantiate new blockchain smashingCoin
 let smashingCoin = new CryptoBlockchain();
-// Create nwe blocs with addNewBlock method
+// Create new blocks with addNewBlock method
+console.log("smashignCoin mining in progress... "); // let user know program is running
 smashingCoin.addNewBlock(new CryptoBlock(1, "02/26/2020", {sender: "Iris Ljesnjanin", recipient: "Cosima Mielke", quantity: 50}));
 smashingCoin.addNewBlock(new CryptoBlock(2, "02/27/2020", {sender: "Vitaly Friedman", recipient: "Ricardo Gimenes", quantity: 100}) );
 smashingCoin.addNewBlock(new CryptoBlock(3, "02/27/2020", {sender: "Hagar Coder", recipient: "Janae Maker", quantity: 1000}));
@@ -73,3 +91,15 @@ checkChainValidity(){
         return true;
     }
 
+// Add Proof Of Work method
+// create method proofOfWork() that uses a simple algorithm to identify a number (difficulty property)
+// so that every block has leading zeros that correspond to this difficulty level
+// the higher the "difficulty" the more time it takes to mine new blocks
+// add random nonce value to every hashed block so that when rehashing takes place the difficulty 
+// level restriction can still be met
+proofOfWork(difficulty){
+      while(this.hash.substring(0, difficulty) !==Array(difficulty + 1).join("0")){
+          this.nonce++;
+          this.hash = this.computeHash();
+      }        
+  }

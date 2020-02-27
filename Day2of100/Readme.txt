@@ -29,3 +29,8 @@ Create CryptoBlock class
 # Verify Blockchain's Integrity
 >>> once a block has been added to the chain it cannot be changed without invalidating the integrity of the rest of the chain
 ## verify blockchain integrity
+
+# Add Proof of Work
+>>> increase the difficulty entailed in mining or adding new blocks to the blockchain
+## Create a simple algorithm that deters people from generating new blocks easily or spamming the blockchain
+## Update code with nonce and proofOfWork() parameters/methods as necessary
