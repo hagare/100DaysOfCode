@@ -16,5 +16,12 @@ Create CryptoBlock class
 > npm install --save crypto-js
 
 # Create blockchain
+## Create block with required parameters and output hash
+## Create method for genesis block
+## Create method for obtaining latest block
+## Create method to add new block which has preceding hash and new block adds to the chain
 
 # Test the Blockchain
+## Create new instance of CryptoBlockchain() method. Our currency is smashingcoin.js
+## use method addNewBlock to create blocks to chain
+## output 4 hashes in chain
