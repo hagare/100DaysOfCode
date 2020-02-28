@@ -3,7 +3,14 @@
   + Blockchain voting app NodeJS and ethereum
 2. Day 2 of 100 2/26/20
   + Blockchain Cryptocurrency NodeJS
- 3. Day 3 of 100 2/27/20
+3. Day 3 of 100 2/27/20
   + Local webserver with search Apache Webserver PHP Shell
- 4. Day 4 of 100 2/28/20
+4. Day 4 of 100 2/28/20
+  + Natural language processing with Python and Google API
+5. Day 5 of 100 2/29/20
   + 
+6. Day 6 of 100 3/1/20
+  +
+7. Day 7 of 100 3/2/20
+  +
+  
