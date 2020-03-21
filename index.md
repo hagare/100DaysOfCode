@@ -7,12 +7,10 @@
   + Local webserver with search Apache Webserver PHP Shell
 4. Day 4 of 100 3/20/20
  + Using Jupyter Notebook in IBM Watson Studio
-5. Day 5 of 100 3/21/20
+5. Day 5 of 100 3/20/20
+  + Creating a Visual Recognition instance in IBM Watson studio using a general model
+6. Day 6 of 100 3/21/20
   + PCA in R using Zeppelin Notebook
-6. Day 6 of 100 3/1/20
-  +
-7. Day 7 of 100 3/2/20
-  +
   
-Project Ideas:
+Future Project Ideas:
  + Natural language processing with Python and Google API
