@@ -11,6 +11,8 @@
   + Creating a Visual Recognition instance in IBM Watson studio using a general model
 6. Day 6 of 100 3/21/20
   + PCA in R using Zeppelin Notebook
+12. Day 12 of 100 6/4/20
+  + Hierarchical Clustering in R
   
 Future Project Ideas:
  + Natural language processing with Python and Google API
